@@ -15,6 +15,11 @@ import retrofit2.Response
 class UserRepository(var api:MyApi,var database:AppDatabase):SafeApiRequest() {
 
 
+    suspend fun userSignUp(name:String,email: String,password: String):AuthResponse{
+     return apiRequest { api.userSignUp(name, email, password) }
+    }
+
+
    suspend fun userLogin(email:String,password:String):AuthResponse{
 
        //1111111
@@ -48,6 +53,9 @@ class UserRepository(var api:MyApi,var database:AppDatabase):SafeApiRequest() {
     }
 
     suspend fun saveUser(user:UserEntity) = database.getUserDao().upsert(user)
+
+
+
 
     fun getUser() = database.getUserDao().getUser()
 }

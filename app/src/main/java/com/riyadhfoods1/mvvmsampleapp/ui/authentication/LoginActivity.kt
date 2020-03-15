@@ -53,15 +53,15 @@ class LoginActivity : AppCompatActivity(),AuthListner ,KodeinAware{
         binding.viewmodel = viewModel
         viewModel.authListner = this
 
-        viewModel.getLoggedInuser().observe(this, Observer {UserEntity ->
-            if (UserEntity != null) {
-              Intent(this,HomeActivity::class.java).also {
-                  it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                  startActivity(it)
-              }
-            }
+//        viewModel.getLoggedInuser().observe(this, Observer {UserEntity ->
+//            if (UserEntity != null) {
+//              Intent(this,HomeActivity::class.java).also {
+//                  it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                  startActivity(it)
+//              }
+//            }
 
-        })
+//        })
 
     }
 

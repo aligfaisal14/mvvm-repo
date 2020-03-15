@@ -117,6 +117,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:layout_below="@id/linearLayout2"
                 android:textAlignment="center"
+                android:onClick="@{viewmodel::onSignup}"
                 android:text="Don't have an account?\nSign Up Here"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
