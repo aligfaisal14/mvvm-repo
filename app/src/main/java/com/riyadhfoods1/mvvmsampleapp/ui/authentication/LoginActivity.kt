@@ -11,6 +11,7 @@ import com.riyadhfoods1.mvvmsampleapp.R
 import com.riyadhfoods1.mvvmsampleapp.data.database.AppDatabase
 import com.riyadhfoods1.mvvmsampleapp.data.database.entities.UserEntity
 import com.riyadhfoods1.mvvmsampleapp.data.network.MyApi
+import com.riyadhfoods1.mvvmsampleapp.data.network.NetworkConnectionInterceptor
 import com.riyadhfoods1.mvvmsampleapp.data.repository.UserRepository
 import com.riyadhfoods1.mvvmsampleapp.databinding.ActivityLoginBinding
 import com.riyadhfoods1.mvvmsampleapp.ui.home.HomeActivity
@@ -25,7 +26,10 @@ class LoginActivity : AppCompatActivity(),AuthListner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var api =MyApi()
+
+        var networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+
+        var api =MyApi(networkConnectionInterceptor)
         var db = AppDatabase(this)
         var repository = UserRepository(api,db)
         val factory = AuthViewModelFactory(repository)

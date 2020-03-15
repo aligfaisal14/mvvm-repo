@@ -1,6 +1,7 @@
 package com.riyadhfoods1.mvvmsampleapp.data.network
 
 import com.riyadhfoods1.mvvmsampleapp.data.network.responses.AuthResponse
+import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
@@ -18,8 +19,12 @@ interface MyApi {
 
 
     companion object{
-        operator fun invoke():MyApi{
+        operator fun invoke(networkConnectionInterceptor: NetworkConnectionInterceptor):MyApi{
+// network connectivity checking
+            val okHttpClient = OkHttpClient.Builder().addInterceptor(networkConnectionInterceptor).build()
+
             return  Retrofit.Builder()
+                .client(okHttpClient)
                 .baseUrl("https://api.simplifiedcoding.in/course-apis/mvvm/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

@@ -2,9 +2,11 @@ package com.riyadhfoods1.mvvmsampleapp.ui.authentication
 
 import android.view.View
 import androidx.lifecycle.ViewModel
+import com.riyadhfoods1.mvvmsampleapp.data.network.NetworkConnectionInterceptor
 import com.riyadhfoods1.mvvmsampleapp.data.repository.UserRepository
 import com.riyadhfoods1.mvvmsampleapp.util.ApiException
 import com.riyadhfoods1.mvvmsampleapp.util.Coroutines
+import com.riyadhfoods1.mvvmsampleapp.util.NoInternetException
 
 class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
     var email:String?=null
@@ -39,6 +41,8 @@ class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
                 }
                 authListner?.onFaliure(authResponse.message!!)
             }catch (e:ApiException){
+                authListner?.onFaliure(e.message!!)
+            }catch (e:NoInternetException){
                 authListner?.onFaliure(e.message!!)
             }
 

@@ -2,6 +2,7 @@ package com.riyadhfoods1.mvvmsampleapp.data.network
 
 import android.content.Context
 import android.net.ConnectivityManager
+import com.riyadhfoods1.mvvmsampleapp.util.NoInternetException
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -9,7 +10,12 @@ class NetworkConnectionInterceptor( context: Context) : Interceptor {
     private val context = context.applicationContext
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+      if(!isNetworkAvailable()){
+      throw NoInternetException("Make sure you have active data internet connection")
+      }
+        else{
+          return chain.proceed(chain.request())
+      }
     }
 
 
