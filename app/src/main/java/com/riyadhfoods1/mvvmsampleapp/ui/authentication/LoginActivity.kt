@@ -20,19 +20,33 @@ import com.riyadhfoods1.mvvmsampleapp.util.show
 import com.riyadhfoods1.mvvmsampleapp.util.snackbar
 import com.riyadhfoods1.mvvmsampleapp.util.toast
 import kotlinx.android.synthetic.main.activity_login.*
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class LoginActivity : AppCompatActivity(),AuthListner {
+class LoginActivity : AppCompatActivity(),AuthListner ,KodeinAware{
+
+
+    override val kodein by kodein()
+    private val factory:AuthViewModelFactory by instance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
-        var networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+//        var networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+//
+//        var api =MyApi(networkConnectionInterceptor)
+//        var db = AppDatabase(this)
+//        var repository = UserRepository(api,db)
+//        val factory = AuthViewModelFactory(repository)
 
-        var api =MyApi(networkConnectionInterceptor)
-        var db = AppDatabase(this)
-        var repository = UserRepository(api,db)
-        val factory = AuthViewModelFactory(repository)
+
+
+
+
 
         val binding:ActivityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login)
         val viewModel = ViewModelProviders.of(this,factory).get(AuthViewModel::class.java)
@@ -69,4 +83,6 @@ class LoginActivity : AppCompatActivity(),AuthListner {
         root_layout.snackbar(message)
         progress_bar.hide()
     }
+
+
 }
