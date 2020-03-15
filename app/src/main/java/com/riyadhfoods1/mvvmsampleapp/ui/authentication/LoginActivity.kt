@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity(),AuthListner ,KodeinAware{
 //                  startActivity(it)
 //              }
 //            }
-
+//
 //        })
 
     }
@@ -76,7 +76,11 @@ class LoginActivity : AppCompatActivity(),AuthListner ,KodeinAware{
 //            progress_bar.hide()
 //        })
         progress_bar.hide()
+        Intent(this, HomeActivity::class.java).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(it)
 //        root_layout.snackbar("${userEntity.name}")
+        }
     }
 
     override fun onFaliure(message: String) {

@@ -6,6 +6,7 @@ import com.riyadhfoods1.mvvmsampleapp.data.network.MyApi
 import com.riyadhfoods1.mvvmsampleapp.data.network.NetworkConnectionInterceptor
 import com.riyadhfoods1.mvvmsampleapp.data.repository.UserRepository
 import com.riyadhfoods1.mvvmsampleapp.ui.authentication.AuthViewModelFactory
+import com.riyadhfoods1.mvvmsampleapp.ui.home.profile.ProfileViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -23,5 +24,6 @@ class MVVMApplication: Application(),KodeinAware {
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { UserRepository(instance(),instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
+        bind() from  provider { ProfileViewModelFactory(instance()) }
     }
 }
