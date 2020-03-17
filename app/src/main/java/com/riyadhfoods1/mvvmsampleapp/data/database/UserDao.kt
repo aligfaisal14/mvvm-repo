@@ -19,4 +19,7 @@ interface UserDao{
     @Query("SELECT * FROM USERENTITY WHERE uid = $CURRENT_USER_ID")
     fun getUser():LiveData<UserEntity>
 
+
+
+
 }
